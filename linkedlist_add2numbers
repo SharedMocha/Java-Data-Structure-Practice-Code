@@ -1,0 +1,65 @@
+/*
+You are given two linked lists representing two non-negative numbers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+
+    342 + 465 = 807
+Make sure there are no trailing zeros in the output list
+So, 7 -> 0 -> 8 -> 0 is not a valid response even though the value is still 807.
+
+ NOTE: You only need to implement the given function. Do not read input, instead use the arguments to the function. Do not print the output, instead return values as specified. Still have a doubt? Checkout Sample Codes for more details. 
+*/
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+	public ListNode addTwoNumbers(ListNode A, ListNode B) {
+	    ListNode node1 = null;
+	    ListNode prev1 = null;
+	    ListNode first1 = null;
+	    int carry = 0;
+	    int sum = 0;
+	    int cam = 0;
+	    
+	    while (A != null || B != null || carry != 0) {
+	        
+	        node1 = new ListNode(0);
+	        sum = carry;
+	        
+	        if (first1 == null)
+	        {
+	            first1 = node1;
+	            cam = cam +1;
+	        }
+	            
+	        if (prev1 != null) {
+	            prev1.next = node1;
+	        }
+	        
+	        if (A != null) {
+	            sum += A.val;
+	            A = A.next;
+	        }
+	            
+	        if (B != null) {
+	            sum += B.val;
+	            B = B.next;
+	        }
+	        
+	        node1.val = sum % 10;
+	        sum /= 10;
+	        carry = sum;
+	        prev1 = node1;
+	    }
+	    
+	    return first1;
+	    
+	}
+}
