@@ -10,30 +10,55 @@ Input: [2, 7, 11, 15], target=9
 Output: index1 = 1, index2 = 2
 
 */
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ */
 public class Solution {
-	public ArrayList<Integer> twoSum(final List<Integer> a, int b) {
-	    Hashtable hash = new Hashtable();
-	    //Integer[] answers = new Integer[2];
-	    ArrayList<Integer> answers = new ArrayList<Integer>();
+	public ListNode addTwoNumbers(ListNode A, ListNode B) {
+	    ListNode node1 = null;
+	    ListNode prev1 = null;
+	    ListNode first1 = null;
+	    int carry = 0;
+	    int sum = 0;
 
-	    //Integer[] array = new int[a.size()];
-	    //a.toArray(array); // fill the array
-	    for(int i=0 ; i <a.size();i++)
-	    {
-	    int key = a.get(i);
-	    if(hash.containsKey(key)){
-	        answers.add((int)hash.get(key));
-	        answers.add(i);
+	    while (A != null || B != null || carry != 0) {
 	        
-	        //answers[0] = (int)hash.get(key);
-	        //answers[0] = i;
-	        break;
+	        node1 = new ListNode(0);
+	        sum = carry;
+	        
+	        if (first1 == null)
+	        {
+	            first1 = node1;
+	        }
+	            
+	        if (prev1 != null) {
+	            prev1.next = node1;
+	        }
+	        
+	        if (A != null) {
+	            sum += A.val;
+	            A = A.next;
+	        }
+	            
+	        if (B != null) {
+	            sum += B.val;
+	            B = B.next;
+	        }
+	        
+	        node1.val = sum % 10;
+	        sum /= 10;
+	        carry = sum;
+	        prev1 = node1;
 	    }
-	    else{
-	        hash.put(b - key,i);
-	    }
+	    
+	    return first1;
+	    
 	}
-		   return answers;
 }
-}
+
 
